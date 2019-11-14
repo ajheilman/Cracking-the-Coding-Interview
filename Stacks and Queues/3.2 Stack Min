@@ -74,13 +74,5 @@ public class MyStack<T> {
         System.out.println(stack1.peek());
         System.out.println("Min: " + stack1.getMin());
         System.out.println("Max: " + stack1.getMax());
-        
-        
-        System.out.println();
-        
-        MyStack<String> stack2 = new MyStack<String>();
-        stack2.push("Hello");
-        stack2.push("Hi");
-        System.out.println(stack2.peek());
     }
 }
