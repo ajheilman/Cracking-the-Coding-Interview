@@ -1,0 +1,86 @@
+package mystack;
+import java.util.EmptyStackException;
+
+public class MyStack<T> {
+     
+    private static class StackNode<T>{
+        private T data;
+        private StackNode<T> next;
+        
+        public StackNode(T data){
+            this.data = data;
+        }
+    }
+    
+    private StackNode<T> top;
+    private Integer min = null;
+    private Integer max = null;
+    
+    public T pop(){
+        if(top == null) throw new EmptyStackException();
+        T item = top.data;
+        top = top.next;
+        return item;
+    }
+
+    public void push (T item){
+        StackNode<T> t = new StackNode<>(item);
+        t.next = top;
+        top = t;
+        
+        if(item instanceof Integer){
+            int i = ((Integer) item);
+            if(min == null)
+                min = i;
+            else if(i < min)
+                min = i;
+            
+            if(max == null)
+                max = i;
+            else if(i > max)
+                max = i;
+        }
+    }
+
+    public T peek(){
+        if(top == null) throw new EmptyStackException();
+        return top.data;
+    }
+
+    public boolean isEmpty(){
+        return top == null;
+    }
+    
+    public int getMin(){
+        if(top == null) throw new EmptyStackException();
+        return min;
+    }
+    
+    public int getMax(){
+        if(top == null) throw new EmptyStackException();
+        return max;
+    }
+
+    public static void main(String[] args){
+        MyStack<Integer> stack1 = new MyStack<>();		
+        
+        stack1.push(12);
+        System.out.println(stack1.peek());
+        stack1.push(23);
+        System.out.println(stack1.peek());
+        stack1.push(7);
+        System.out.println(stack1.peek());
+        stack1.push(-3);
+        System.out.println(stack1.peek());
+        System.out.println("Min: " + stack1.getMin());
+        System.out.println("Max: " + stack1.getMax());
+        
+        
+        System.out.println();
+        
+        MyStack<String> stack2 = new MyStack<String>();
+        stack2.push("Hello");
+        stack2.push("Hi");
+        System.out.println(stack2.peek());
+    }
+}
